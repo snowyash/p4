@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 
@@ -179,6 +180,7 @@ return array(
 		'Request'           => 'Illuminate\Support\Facades\Request',
 		'Response'          => 'Illuminate\Support\Facades\Response',
 		'Route'             => 'Illuminate\Support\Facades\Route',
+		'Pre'             	=> 'Paste\Pre',
 		'Schema'            => 'Illuminate\Support\Facades\Schema',
 		'Seeder'            => 'Illuminate\Database\Seeder',
 		'Session'           => 'Illuminate\Support\Facades\Session',

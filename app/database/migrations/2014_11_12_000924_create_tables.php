@@ -36,7 +36,7 @@ class CreateTables extends Migration {
 	        $table->string('address');
 	        $table->string('phone');
 	        $table->string('email')->nullable();
-	        $table->integer('website')->nullable();
+	        $table->string('website')->nullable();
 		});
 
 		Schema::create('pets', function($table) {
@@ -90,11 +90,11 @@ class CreateTables extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('pet_vaccine');
+		Schema::drop('vaccines');
 		Schema::drop('pets');
 		Schema::drop('vets');
-		Schema::drop('vaccines');
-		Schema::drop('pet_vaccine');
+		Schema::drop('users');
 	}
 
 }

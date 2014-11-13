@@ -11,6 +11,6 @@ class Pet extends Eloquent {
     }
 
     public function vaccines() {
-        return $this->belongsToMany('Vaccine');
+        return $this->belongsToMany('Vaccine')->withPivot('expiry');
     }
 }

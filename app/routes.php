@@ -77,7 +77,7 @@ Route::post('/signup',
             # Log the user in
             Auth::login($user);
 
-            return Redirect::to('/add_vet')->with('flash_message', 'Welcome to PawBook!');
+            return Redirect::to('/add_pet')->with('flash_message', 'Welcome to PawBook!');
 
         }
     )
@@ -121,22 +121,80 @@ Route::get('/logout', function() {
 
 });
 
-Route::get('/add_vet', 
+Route::get('/add_pet', 
     array(
         'before' => 'auth', 
         function($format = 'html') {
-		    $vet = new Vet();
 
-		    # Set 
-		    $vet->name = 'VCA Blossom Hill';
-		    $vet->address = 'Oakridge Mall, San Jose, CA 95123';
-		    $vet->phone = '408-900-0000';
-		    $vet->email = 'vca@blossomhill.com';
-		    $vet->website = 'http://www.vcablossomhill.com';
+            //$rabies = Vaccine::where('name', '=', 'Rabies')->first();
+            $bordetella = Vaccine::where('name', '=', 'Bordetella')->first();
+            $parvo = Vaccine::where('name', '=', 'Parvo')->first();
+            $heartworm = Vaccine::where('name', '=', 'Heartworm Test')->first();
+            $distemper = Vaccine::where('name', '=', 'Distemper')->first();
+            $flea = Vaccine::where('name', '=', 'Flea Prevention')->first();
 
-		    $vet->save();
+		    $pet = Pet::where('name', '=', 'Louis')->first();
 
-		    return 'Added VCA Blossom Hill! Check your database to see...';
+            //$pet->vaccines()->attach($rabies);
+            $pet->vaccines()->attach($bordetella);
+            $pet->vaccines()->attach($parvo);
+            $pet->vaccines()->attach($heartworm);
+            $pet->vaccines()->attach($distemper);
+            $pet->vaccines()->attach($flea);
+
+            /*$date = $pet->vaccines()->where('name', '=', 'Rabies')->first();
+            $date->pivot->expiry = "2014-12-30";
+            $date->pivot->save();*/
+
+            $date = $pet->vaccines()->where('name', '=', 'Bordetella')->first();
+            $date->pivot->expiry = "2015-05-09";
+            $date->pivot->save();
+
+            $date = $pet->vaccines()->where('name', '=', 'Parvo')->first();
+            $date->pivot->expiry = "2015-10-05";
+            $date->pivot->save();
+
+            $date = $pet->vaccines()->where('name', '=', 'Heartworm Test')->first();
+            $date->pivot->expiry = "2014-05-22";
+            $date->pivot->save();
+
+            $date = $pet->vaccines()->where('name', '=', 'Distemper')->first();
+            $date->pivot->expiry = "2014-12-18";
+            $date->pivot->save();
+
+            $date = $pet->vaccines()->where('name', '=', 'Flea Prevention')->first();
+            $date->pivot->expiry = "2015-03-20";
+            $date->pivot->save();
+
+            return "Success!";
+        }
+    )
+);
+
+Route::get('/get_pet', 
+    array(
+        'before' => 'auth', 
+        function($format = 'html') {
+
+            $pet = Pet::first();
+            $user = $pet->user;
+            $vet = $pet->vet;
+
+            echo $pet->name."<br />";
+            echo $pet->breed."<br />";
+            echo $pet->sex."<br />";
+            echo "<img src='".$pet->picture."'/><br />";
+            
+            for($i = 1; $i < 7; $i++){
+                $vaccine = $pet->vaccines()->where('id', '=', $i)->first();
+                echo $vaccine->name."'s expiry date is ".$vaccine->pivot->expiry."<br />";
+            }
+
+            echo "Owner's name is ".$user->name."<br />";
+            echo "Vet: ".$vet->name."<br />";
+
+
+
         }
     )
 );

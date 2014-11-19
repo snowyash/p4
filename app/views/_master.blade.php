@@ -30,9 +30,9 @@
 
     <br />
     @if(Auth::check())
-        <a href='/logout'>Log out {{ Auth::user()->email; }}</a>
+        <a href='/user/logout'>Log out {{ Auth::user()->email; }}</a>
     @else 
-        <a href='/signup'>Sign up</a> or <a href='/login'>Log in</a>
+        <a href='/user/signup'>Sign up</a> or <a href='/user/login'>Log in</a>
     @endif
     <br />
 

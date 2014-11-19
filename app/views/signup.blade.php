@@ -7,7 +7,12 @@
 @section('content')
 	<h1>Sign up</h1>
 
-	{{ Form::open(array('url' => '/signup')) }}
+	@foreach($errors->all() as $message) 
+	    <div class='error'>{{ $message }}</div>
+	@endforeach
+	<br />
+
+	{{ Form::open(array('url' => '/user/signup')) }}
 
 	    Name<br>
 	    {{ Form::text('name') }}<br><br>

@@ -6,6 +6,7 @@
 
 ##Description
 ![PawBook Database Relationship](public/img/db_relationship.png "Database Relationship")
+![PawBook SiteMap](public/img/pawbook sitemap.png "Sitemap")
 
 **PawBook** is a convenient and portable minisite for pet owners to save their pet information online. Pet owners will no longer need to carry a piece of paper with pet vaccination record at all times, or look up the internet about their vet information when they are out with their pets anymore. PawBook is easy to register, add information, and refer to.
 
@@ -17,6 +18,7 @@
 
 ###Bonus features:
 * Email pet information to vendors, such as petstore, pet trainer, new vet, events, etc.
+* Add vet & vaccine information
 
 ##Demo
 Demo will be presented in a live section.

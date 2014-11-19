@@ -45,83 +45,12 @@ Route::get('/truncate', function() {
     DB::statement('TRUNCATE book_tag');
 });
 
-Route::get('/signup',
-    array(
-        'before' => 'guest',
-        function() {
-            return View::make('signup');
-        }
-    )
-);
+Route::get('/user/{user_id}/edit', 'UserController@edit');
+Route::controller('user', 'UserController');
 
-Route::post('/signup', 
-    array(
-        'before' => 'csrf', 
-        function() {
+Route::resource('pet', 'PetController');
 
-            $user = new User;
-            $user->email    = Input::get('email');
-            $user->name 	= Input::get('name');
-            $user->surname	= Input::get('surname');
-            $user->password = Hash::make(Input::get('password'));
-
-            # Try to add the user 
-            try {
-                $user->save();
-            }
-            # Fail
-            catch (Exception $e) {
-                return Redirect::to('/signup')->with('flash_message', 'Sign up failed; please try again.')->withInput();
-            }
-
-            # Log the user in
-            Auth::login($user);
-
-            return Redirect::to('/add_pet')->with('flash_message', 'Welcome to PawBook!');
-
-        }
-    )
-);
-
-Route::get('/login',
-    array(
-        'before' => 'guest',
-        function() {
-            return View::make('login');
-        }
-    )
-);
-
-Route::post('/login', 
-    array(
-        'before' => 'csrf', 
-        function() {
-
-            $credentials = Input::only('email', 'password');
-
-            if (Auth::attempt($credentials, $remember = true)) {
-                return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
-            }
-            else {
-                return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
-            }
-
-            return Redirect::to('login');
-        }
-    )
-);
-
-Route::get('/logout', function() {
-
-    # Log out
-    Auth::logout();
-
-    # Send them to the homepage
-    return Redirect::to('/');
-
-});
-
-Route::get('/add_pet', 
+/*Route::get('/add_pet', 
     array(
         'before' => 'auth', 
         function($format = 'html') {
@@ -142,9 +71,9 @@ Route::get('/add_pet',
             $pet->vaccines()->attach($distemper);
             $pet->vaccines()->attach($flea);
 
-            /*$date = $pet->vaccines()->where('name', '=', 'Rabies')->first();
-            $date->pivot->expiry = "2014-12-30";
-            $date->pivot->save();*/
+            //$date = $pet->vaccines()->where('name', '=', 'Rabies')->first();
+            //$date->pivot->expiry = "2014-12-30";
+            //$date->pivot->save();
 
             $date = $pet->vaccines()->where('name', '=', 'Bordetella')->first();
             $date->pivot->expiry = "2015-05-09";
@@ -169,9 +98,9 @@ Route::get('/add_pet',
             return "Success!";
         }
     )
-);
+);*/
 
-Route::get('/get_pet', 
+/*Route::get('/get_pet', 
     array(
         'before' => 'auth', 
         function($format = 'html') {
@@ -197,4 +126,4 @@ Route::get('/get_pet',
 
         }
     )
-);
+);*/

@@ -5,6 +5,12 @@
 @stop
 
 @section('content')
+	<h3>
+	    @if(Session::get('flash_message'))
+	        <div class='flash-message'>{{ Session::get('flash_message') }}</div>
+	    @endif
+	</h3>
+
 	@if(sizeof($pets) == 0)
 		<h2>Sorry, you don\'t have a pet. Why don\'t you <a href="/pet/creat">add one</a>?</h2>
 	@else

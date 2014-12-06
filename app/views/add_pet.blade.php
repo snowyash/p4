@@ -56,7 +56,7 @@
 	        ) }}
 
 	        <br>
-	        
+
 		    <!--vaccine, and vet selector-->
 
 	        {{ Form::label( 'vet', 'Vet*' ) }}
@@ -124,4 +124,5 @@
 		{{ Form::close() }}
 
 	</div>
+</div>
 @stop

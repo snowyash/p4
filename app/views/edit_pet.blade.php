@@ -39,7 +39,7 @@
 	          )) }}
 
 	        {{ Form::label( 'birthday', 'Birthday' ) }}
-		    {{ Form::text('birthday', $pet['birthday'], array(
+		    {{ Form::text('birthday', Pet::displayDateFmt($pet['birthday']), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
@@ -70,17 +70,17 @@
 	        <div class="form-group col-lg-6">
 
 	        {{ Form::label( 'rabies', 'Rabies' ) }}
-		    {{ Form::text('rabies', Pet::displayDateFmt($pet, 1), array(
+		    {{ Form::text('rabies', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 1)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
 	        {{ Form::label( 'bordetella', 'Bordetella' ) }}
-		    {{ Form::text('bordetella', Pet::displayDateFmt($pet, 2), array(
+		    {{ Form::text('bordetella', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 2)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
 	        {{ Form::label( 'parvo', 'Parvo' ) }}
-		    {{ Form::text('parvo', Pet::displayDateFmt($pet, 3), array(
+		    {{ Form::text('parvo', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 3)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 		</div>
@@ -88,24 +88,24 @@
 		<div class="form-group col-lg-6">
 
 	        {{ Form::label( 'heartworm', 'Heartworm Test' ) }}
-		    {{ Form::text('heartworm', Pet::displayDateFmt($pet, 4), array(
+		    {{ Form::text('heartworm', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 4)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
 	        {{ Form::label( 'distemper', 'Distemper' ) }}
-		    {{ Form::text('distemper', Pet::displayDateFmt($pet, 5), array(
+		    {{ Form::text('distemper', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 5)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
 	        {{ Form::label( 'flea', 'Flea Prevention' ) }}
-		    {{ Form::text('flea', Pet::displayDateFmt($pet, 6), array(
+		    {{ Form::text('flea', Pet::displayDateFmt($pet->vaccines()->where('id', '=', 6)->first()->pivot->expiry), array(
 	              'class' => 'form-control datepicker',
 	          )) }}
 
 		</div>
 
 		<div>&nbsp;</div>
-		
+
 	    <div class="form-group col-lg-3 col-centered">
 
 			{{ Form::submit('Save', array(

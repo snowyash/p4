@@ -7,7 +7,7 @@
 @section('content')
 	<h1>
 	    @if(Session::get('flash_message'))
-	        <div class='welcome-message'>{{ Session::get('flash_message').Auth::user()->name.'!' }}</div>
+	        <div class='welcome-message'>{{ Session::get('flash_message').'&nbsp;'.Auth::user()->name.'!' }}</div>
 	    @endif
 	</h1>
 

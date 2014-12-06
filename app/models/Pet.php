@@ -39,9 +39,18 @@ class Pet extends Eloquent {
     	return $new_date;
     }
 
-    public static function displayDateFmt($pet, $n){
-        $date = $pet->vaccines()->where('id', '=', $n)->first()->pivot->expiry;
+    public static function displayDateFmt($date){
         $new_date = substr($date, 5, 2).'/'.substr($date, 8, 2).'/'.substr($date, 0, 4);
         return $new_date;
+    }
+
+    public static function saveVaccine($pet, $date, $name){
+
+        $vaccine = Vaccine::where('name', '=', $name)->first();
+        $vaccine_date = Pet::saveDateFmt($date);
+        $pet->vaccines()->attach($vaccine);
+        $vaccine = $pet->vaccines()->where('name', '=', $name)->first();
+        $vaccine->pivot->expiry = $vaccine_date;
+        $vaccine->pivot->save();
     }
 }

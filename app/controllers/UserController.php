@@ -23,20 +23,20 @@ class UserController extends \BaseController {
     public function postSignup() {
 
     	$rules = array(
-		    'email' => 'required|email|unique:users,email',
 		    'name' => 'required|alpha|min:2',
 		    'surname' => 'required|alpha|min:2',
+		    'email' => 'required|email|unique:users,email',
 		    'password' => 'required|min:4'   
 		);          
 
 		$messages = array(
-			'email.required' => 'Email field is required.',
-			'email.email' => 'Please input a valid email',
-			'email.unique' => 'Sorry, somebody already uses this email.',
 			'name.required' => 'Name field is required.',
 			'name.alpha' => 'Please only use English alphabets.',
 			'surname.required' => 'Surname field is required.',
 			'surname.alpha' => 'Please only use English alphabets',
+			'email.required' => 'Email field is required.',
+			'email.email' => 'Please input a valid email',
+			'email.unique' => 'Sorry, somebody already uses this email.',
 			'password.required' => 'Password field is required.',
 			'password.size' => 'Please enter more than :size characters for password.',
 		);
@@ -63,7 +63,9 @@ class UserController extends \BaseController {
         }
         # Fail
         catch (Exception $e) {
-            return Redirect::to('/user/signup')->with('flash_message', 'Sign up failed; please try again.')->withInput();
+            return Redirect::to('/user/signup')
+	            ->with('flash_message', 'Sign up failed; please try again.')
+	            ->withInput();
         }
 
         # Log the user in
@@ -79,13 +81,36 @@ class UserController extends \BaseController {
 
     # POST: http://localhost/user/login
     public function postLogin() {
-    	$credentials = Input::only('email', 'password');
+    	$rules = array(
+		    'email' => 'required|email',
+		    'password' => 'required|min:4'   
+		);          
+
+		$messages = array(
+			'email.required' => 'Email field is required.',
+			'email.email' => 'Please input a valid email',
+			'email.unique' => 'Sorry, somebody already uses this email.',
+			'password.required' => 'Password field is required.',
+			'password.size' => 'Please enter more than :size characters for password.',
+		);
+
+		$validator = Validator::make(Input::all(), $rules, $messages);
+
+		if($validator->fails()) {
+
+		    return Redirect::to('/user/login')
+		        ->with('flash_message', 'Log in failed; please fix the errors listed below.')
+		        ->withInput()
+		        ->withErrors($validator);
+		}
+
+		$credentials = Input::only('email', 'password');
 
         if (Auth::attempt($credentials, $remember = true)) {
-            return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+            return Redirect::intended('/')->with('flash_message', 'Welcome Back, ');
         }
         else {
-            return Redirect::to('/user/login')->with('flash_message', 'Log in failed; please try again.');
+            return Redirect::to('/user/login')->with('flash_message', 'Log in failed; please check your email or password.');
         }
 
         return Redirect::to('/user/login');

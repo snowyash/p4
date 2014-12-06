@@ -48,7 +48,7 @@ class CreateTables extends Migration {
 	        $table->string('name');
 	        $table->string('breed');
 	        $table->string('sex');
-	        $table->string('picture')->nullable();
+			$table->date('birthday');
 	        $table->integer('user_id')->unsigned();
 	        $table->integer('vet_id')->unsigned();
 

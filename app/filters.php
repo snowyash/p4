@@ -43,7 +43,9 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('\user\login')
+				->with('flash_message', 'Please login to view this page');
+;
 		}
 	}
 });

@@ -1,0 +1,72 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+
+.navbar{
+	background-color: #F37D2C;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.col-right{
+    float: right;
+}
+
+#brand{
+	color: #F37D2C;
+	text-decoration: none;
+}
+
+.flash-message{
+	color: red;
+}
+
+.vaccine_list{
+	text-decoration: none;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+.pet_list{
+	float: left;
+	width: 50%;
+}
+
+.pet{
+	border-radius: 15px;
+	padding: 10px;
+	margin-bottom: 20px;
+	width: 95%;
+	height: auto;
+	border: 1px solid #800000;
+}
+
+.group_edit{
+	float: left;
+}
+
+.edit_link{
+	padding-top: 32px;
+}
+
+.delete-btn{
+	padding-top: 7px;
+}
+
+.delete-btn a{
+	color: red;
+}
+
+.vaccine_list{
+	padding-top: 70px;
+}
+
+.float-left{
+	float: left;
+}

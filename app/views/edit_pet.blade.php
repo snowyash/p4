@@ -117,7 +117,7 @@
 
 			{{ Form::open(['method' => 'DELETE', 'action' => ['PetController@destroy', $pet->id]]) }}
 		    <div class="form-group float-left delete-btn">
-		    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' onClick='parentNode.submit();return false;'>Delete</a>
+		    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'>Delete</a>
 			</div>
 			{{ Form::close() }}
 

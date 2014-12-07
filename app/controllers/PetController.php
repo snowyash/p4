@@ -185,12 +185,12 @@ class PetController extends \BaseController {
 
 	    $pet->save();
 
-    	Pet::saveVaccine($pet, filter_var($_POST["rabies"], FILTER_SANITIZE_STRING), 'Rabies');
-    	Pet::saveVaccine($pet, filter_var($_POST["bordetella"], FILTER_SANITIZE_STRING), 'Bordetella');
-    	Pet::saveVaccine($pet, filter_var($_POST["parvo"], FILTER_SANITIZE_STRING), 'Parvo');
-    	Pet::saveVaccine($pet, filter_var($_POST["heartworm"], FILTER_SANITIZE_STRING), 'Heartworm Test');
-    	Pet::saveVaccine($pet, filter_var($_POST["distemper"], FILTER_SANITIZE_STRING), 'Distemper');
-    	Pet::saveVaccine($pet, filter_var($_POST["flea"], FILTER_SANITIZE_STRING), 'Flea Prevention');
+    	Pet::updateVaccine($pet, filter_var($_POST["rabies"], FILTER_SANITIZE_STRING), 'Rabies');
+    	Pet::updateVaccine($pet, filter_var($_POST["bordetella"], FILTER_SANITIZE_STRING), 'Bordetella');
+    	Pet::updateVaccine($pet, filter_var($_POST["parvo"], FILTER_SANITIZE_STRING), 'Parvo');
+    	Pet::updateVaccine($pet, filter_var($_POST["heartworm"], FILTER_SANITIZE_STRING), 'Heartworm Test');
+    	Pet::updateVaccine($pet, filter_var($_POST["distemper"], FILTER_SANITIZE_STRING), 'Distemper');
+    	Pet::updateVaccine($pet, filter_var($_POST["flea"], FILTER_SANITIZE_STRING), 'Flea Prevention');
 
 	   	return Redirect::to('/pet')->with('flash_message','Your changes have been saved.');
 	}
@@ -204,7 +204,22 @@ class PetController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		try {
+			$pet = Pet::findOrFail($id);
+		}
+		catch(Exception $e) {
+			return Redirect::to('/pet')->with('flash_message', 'Pet not found');
+		}
+		# Note there's a `deleting` Model event which makes sure book_tag entries are also destroyed
+		# See Tag.php for more details
+		try{
+			Pet::destroy($id);
+		}
+		catch(Exception $e) {
+			return Redirect::to('/pet')->with('flash_message', 'Error deleting pet');
+		}
+
+		return Redirect::to('/')->with('flash_message','This pet has been deleted.');
 	}
 
 

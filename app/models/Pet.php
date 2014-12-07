@@ -53,4 +53,19 @@ class Pet extends Eloquent {
         $vaccine->pivot->expiry = $vaccine_date;
         $vaccine->pivot->save();
     }
+
+    public static function updateVaccine($pet, $date, $name){
+
+        $vaccine_date = Pet::saveDateFmt($date);
+        $vaccine = $pet->vaccines()->where('name', '=', $name)->first();
+        $vaccine->pivot->expiry = $vaccine_date;
+        $vaccine->pivot->save();
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($pet) {
+            DB::statement('DELETE FROM pet_vaccine WHERE pet_id = ?', array($pet->id));
+        });
+    }
 }

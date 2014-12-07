@@ -12,7 +12,7 @@
 	</h3>
 
 	@if(sizeof($pets) == 0)
-		<h2>Sorry, you don\'t have a pet. Why don\'t you <a href="/pet/creat">add one</a>?</h2>
+		<h2>Sorry, you don't have a pet. Why don't you <br /><a href="/pet/create">add one</a>?</h2>
 	@else
 
 		@foreach($pets as $pet)

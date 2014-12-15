@@ -14,40 +14,62 @@ class Pet extends Eloquent {
         return $this->belongsToMany('Vaccine')->withPivot('expiry');
     }
 
-    public static function saveDateFmt($date){
-    	//entered date format is mm/dd/yyyy, we wonna change it to yyyy-mm-dd
+    public static function makeRules(){
+        $rules = array(
+            'name' => 'required|regex:/^[a-zA-Z ]+$/|min:2',
+            'breed' => 'required|regex:/^[a-zA-Z ]+$/|min:2',
+            'birthday' => array('required', 'date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'rabies' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'bordetella' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'parvo' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'heartworm' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'distemper' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/'),
+            'flea' => array('date', 'regex:/^(([0][0-9])|([1][0-2]))[\/](([0-2][0-9])|([3][0-1]))[\/]([2][0][0-2][0-9])$/')
+        );
 
-    	//first check if date input is valid
-    	if (checkdate(substr($date, 0, 2), substr($date, 3, 2), substr($date, 6, 4))) {
-
-    		//then try to create date object
-	    	try {
-			    date_default_timezone_set('America/Los_Angeles');
-
-				$new_date = substr($date, 6, 4).'-'.substr($date, 0, 2).'-'.substr($date, 3, 2);
-
-				$new_date = date_create($new_date);
-
-			} catch (Exception $e) {
-			    return Redirect::to('/pet/create')->with('flash_message', $e->getMessage());
-			}
-			
-		} else {
-			return Redirect::to('/pet/create')->with('flash_message', 'invalid date input');
-		}
-    	
-    	return $new_date;
+        return $rules;
     }
 
-    public static function displayDateFmt($date){
-        $new_date = substr($date, 5, 2).'/'.substr($date, 8, 2).'/'.substr($date, 0, 4);
-        return $new_date;
+    public static function makeMsgs(){
+        $messages = array(
+            'name.required' => 'Name field is required.',
+            'name.regex' => 'Please only use English alphabets in Name field.',
+            'breed.required' => 'Breed field is required.',
+            'breed.regex' => 'Please only use English alphabets in Breed field.',
+            'birthday.required' => 'Please enter your pet\'s birthday.',
+            'birthday.regex' => 'Please double check birthday, or click to select date.',
+            'rabies.regex' => 'Please double check rabies vaccine entry, or click to select date.',
+            'rabies.date' => 'Please double check rabies vaccine entry, or click to select date.',
+            'bordetella.regex' => 'Please double check bordetella vaccine entry, or click to select date.',
+            'parvo.regex' => 'Please double check parvo vaccine entry, or click to select date.',
+            'heartworm.regex' => 'Please double check heartworm test entry, or click to select date.',
+            'distemper.regex' => 'Please double check distemper vaccine entry, or click to select date.',
+            'flea.regex' => 'Please double check flea prevention entry, or click to select date.'
+        );
+
+        return $messages;
+    }    
+
+    public static function saveDateFmt($date){
+
+	    try{
+            date_default_timezone_set('America/Los_Angeles');
+            
+            //entered date format is mm/dd/yyyy, we wonna change it to yyyy-mm-dd
+    		$new_date = substr($date, 6, 4).'-'.substr($date, 0, 2).'-'.substr($date, 3, 2);
+    		$new_date = date_create($new_date);
+            return $new_date;
+            
+        } catch(Exception $ex){
+                throw $e;
+        }
     }
 
     public static function saveVaccine($pet, $date, $name){
 
         $vaccine = Vaccine::where('name', '=', $name)->first();
         $vaccine_date = Pet::saveDateFmt($date);
+
         $pet->vaccines()->attach($vaccine);
         $vaccine = $pet->vaccines()->where('name', '=', $name)->first();
         $vaccine->pivot->expiry = $vaccine_date;
@@ -60,6 +82,16 @@ class Pet extends Eloquent {
         $vaccine = $pet->vaccines()->where('name', '=', $name)->first();
         $vaccine->pivot->expiry = $vaccine_date;
         $vaccine->pivot->save();
+    }
+
+    public static function displayDateFmt($date){
+        if($date !== '0000-00-00'){
+            $new_date = substr($date, 5, 2).'/'.substr($date, 8, 2).'/'.substr($date, 0, 4);
+            return $new_date;
+        } else {
+            $new_date = '';
+            return $new_date;
+        }
     }
 
     public static function boot() {

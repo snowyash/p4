@@ -45,7 +45,6 @@ Route::get('/truncate', function() {
     DB::statement('TRUNCATE book_tag');
 });
 
-Route::get('/user/{user_id}/edit', 'UserController@edit');
 Route::controller('user', 'UserController');
 
 Route::resource('pet', 'PetController');

@@ -18,9 +18,9 @@
 		@foreach($pets as $pet)
 			<div class='pet col-lg-6'>
 				<ul class="pet_list">
-					<li><h2 class="pet_name group_edit">{{ $pet['name']."&nbsp;" }}</h2>
-						<a href='/pet/{{ $pet->id }}/edit' class="edit_link group_edit">Edit</a>
-						<br /><br /><br /><br /></li>
+					<li><h2 class="pet_name">{{ $pet['name']."&nbsp;" }}</h2></li>
+					<li><a href='/pet/{{ $pet->id }}/edit' class="edit_link">Edit</a></li>
+					<li>&nbsp;</li>
 		            <li><p>{{ $pet['breed'].", ".$pet['sex']."<br />" }}</p></li>
 		            <li><p>{{ "Birthday: ".$pet['birthday']."<br />" }}</p></li>
 
@@ -35,7 +35,11 @@
 			            	for($i = 1; $i < 7; $i++){
 			            	echo "<tr>";
 			                $vaccine = $pet->vaccines()->where('id', '=', $i)->first();
-			                echo "<td>".$vaccine->name."&nbsp</td><td>&nbsp".$vaccine->pivot->expiry."</td>";
+			                echo "<td>".$vaccine->name."&nbsp</td>";
+			                if($vaccine->pivot->expiry === '0000-00-00'){
+			                	echo "<td>&nbsp No Data </td>";
+			                } else
+			                	echo "<td>&nbsp".$vaccine->pivot->expiry."</td>";
 			                echo "</tr>";
 			            	}
 			            ?>

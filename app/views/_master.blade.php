@@ -39,12 +39,6 @@
           <ul class="nav nav-pills pull-right">
             @if(Auth::check())
                 <li class="dropdown">
-                  <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Account <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="/">Edit My Account</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
                   <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Pets<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="/pet">See All Pets</a></li>

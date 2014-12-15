@@ -46,17 +46,9 @@ class PetController extends \BaseController {
 	 */
 	public function store()
 	{
-		$rules = array(
-		    'name' => 'required|alpha|min:2',
-		    //'breed' => 'required|alpha|min:2'
-		);          
+		$rules = Pet::makeRules();   
 
-		$messages = array(
-			'name.required' => 'Name field is required.',
-			'name.alpha' => 'Please only use English alphabets in Name field.',
-			//'breed.required' => 'Breed field is required.',
-			//'breed.alpha' => 'Please only use English alphabets in Breed field.'
-		);
+		$messages = Pet::makeMsgs();
 
 		$validator = Validator::make(Input::all(), $rules, $messages);
 
@@ -96,21 +88,8 @@ class PetController extends \BaseController {
     	Pet::saveVaccine($pet, filter_var($_POST["distemper"], FILTER_SANITIZE_STRING), 'Distemper');
     	Pet::saveVaccine($pet, filter_var($_POST["flea"], FILTER_SANITIZE_STRING), 'Flea Prevention');
 
-        Redirect::to('/')->with('flash_message', 'Your New Pet has been saved!');
+        return Redirect::to('/')->with('flash_message', 'Your New Pet has been saved!');
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -124,7 +103,8 @@ class PetController extends \BaseController {
 		    $pet    = Pet::findOrFail($id);
 		}
 		catch(exception $e) {
-		    return Redirect::to('/pet')->with('flash_message', 'Sorry, an error occurred. Please try again later.');
+		    return Redirect::to('/pet')
+		    	->with('flash_message', 'Sorry, an error occured. Please try again later.');
 		}
 
 		return View::make('edit_pet', ['vet_list' => Vet::lists('name','id')])->with('pet', $pet);
@@ -139,17 +119,9 @@ class PetController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$rules = array(
-		    'name' => 'required|alpha|min:2',
-		    //'breed' => 'required|alpha|min:2'
-		);          
+		$rules = Pet::makeRules();   
 
-		$messages = array(
-			'name.required' => 'Name field is required.',
-			'name.alpha' => 'Please only use English alphabets in Name field.',
-			//'breed.required' => 'Breed field is required.',
-			//'breed.alpha' => 'Please only use English alphabets in Breed field.'
-		);
+		$messages = Pet::makeMsgs();
 
 		$validator = Validator::make(Input::all(), $rules, $messages);
 
@@ -167,7 +139,7 @@ class PetController extends \BaseController {
 	    catch(exception $e) {
 	        return Redirect::to('/pet')->with('flash_message', 'Error Editing Pet.');
 	    }
-	    # http://laravel.com/docs/4.2/eloquent#mass-assignment
+	    
 	    $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
 	    $breed = filter_var($_POST["breed"], FILTER_SANITIZE_STRING);
 	    $birthday = filter_var($_POST["birthday"], FILTER_SANITIZE_STRING);

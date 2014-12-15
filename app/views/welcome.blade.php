@@ -16,7 +16,6 @@
                 <ul>
 	                <li><a href="/pet">See my pets</a></li>
 	                <li><a href="/pet/create">Add a pet</a></li>
-	                <li><a href="/">Edit my account</a></li>
 	            </ul>
             @else 
             	<div class="col-lg-5 col-centered">

@@ -8,4 +8,5 @@ $(document).ready(function() {
     	$('.delete-btn').parent().submit(); 
     	return false;
     });
+    
 } );

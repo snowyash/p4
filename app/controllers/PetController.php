@@ -104,7 +104,7 @@ class PetController extends \BaseController {
 		}
 		catch(exception $e) {
 		    return Redirect::to('/pet')
-		    	->with('flash_message', 'Sorry, an error occured. Please try again later.');
+		    	->with('flash_message', $e->getMessage());
 		}
 
 		return View::make('edit_pet', ['vet_list' => Vet::lists('name','id')])->with('pet', $pet);

@@ -21,10 +21,9 @@
 
 	<div class="container col-centered text-center">
 
-		{{ Form::open(array('url' => '/pet/$pet->id', 'method' => 'put')) }}
+		{{ Form::open(array('action' => array('PetController@update', $pet->id), 'method' => 'put')) }}
 
 			{{ Form::hidden('id',$pet['id']); }}
-
 
 	    <div class="form-group col-lg-12">
 

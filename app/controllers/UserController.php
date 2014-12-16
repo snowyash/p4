@@ -71,7 +71,7 @@ class UserController extends \BaseController {
         # Log the user in
         Auth::login($user);
 
-        return Redirect::to('/')->with('flash_message', 'Welcome to PawBook!');
+        return Redirect::to('/')->with('confirm_message', 'Welcome to PawBook!');
     }
 
     # GET: http://localhost/user/login
@@ -107,7 +107,7 @@ class UserController extends \BaseController {
 		$credentials = Input::only('email', 'password');
 
         if (Auth::attempt($credentials, $remember = true)) {
-            return Redirect::intended('/')->with('flash_message', 'Welcome Back,');
+            return Redirect::intended('/')->with('confirm_message', 'Welcome Back,');
         }
         else {
             return Redirect::to('/user/login')->with('flash_message', 'Log in failed; please check your email or password.');
@@ -122,6 +122,6 @@ class UserController extends \BaseController {
 	    Auth::logout();
 
 	    # Send them to the homepage
-	    return Redirect::to('/');
+	    return Redirect::to('/')->with('confirm_message', 'Goodbye!');
     }
 }

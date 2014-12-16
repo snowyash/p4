@@ -9,6 +9,41 @@ class PetController extends \BaseController {
         $this->beforeFilter('auth'); 
     } 
 
+	public function sendPetsInfo() {
+
+	    $rules = array(
+            'email' => 'required|email'
+            );
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if($validator->fails()) {
+
+		    return Redirect::to('/pet')
+		        ->with('flash_message', 'Could not send email, please check your input.')
+		        ->withInput();
+		}
+
+        $email = Input::get('email');
+
+	    # Create an array of data, which will be passed/available in the view
+	    $user = Auth::user();
+		$pets = $user->pets;
+
+	    $data = array('user' => $user, 'pets' => $pets, 'email' => $email);
+
+		if(sizeof($pets) !== 0){
+
+			Pet::email($data);
+
+	    	return Redirect::to('/pet')->with('confirm_message', "Your email is sent!");
+
+		} else {
+			return Redirect::to('/pet')->with('flash_message', "Sorry, error sending email. Please try again later.");
+		}
+
+	}
+
     /**
 	 * Display a listing of the resource.
 	 *
@@ -88,7 +123,7 @@ class PetController extends \BaseController {
     	Pet::saveVaccine($pet, filter_var($_POST["distemper"], FILTER_SANITIZE_STRING), 'Distemper');
     	Pet::saveVaccine($pet, filter_var($_POST["flea"], FILTER_SANITIZE_STRING), 'Flea Prevention');
 
-        return Redirect::to('/')->with('flash_message', 'Your New Pet has been saved!');
+        return Redirect::to('/')->with('confirm_message', 'Your New Pet has been saved!');
 	}
 
 	/**
@@ -164,7 +199,7 @@ class PetController extends \BaseController {
     	Pet::updateVaccine($pet, filter_var($_POST["distemper"], FILTER_SANITIZE_STRING), 'Distemper');
     	Pet::updateVaccine($pet, filter_var($_POST["flea"], FILTER_SANITIZE_STRING), 'Flea Prevention');
 
-	   	return Redirect::to('/pet')->with('flash_message','Your changes have been saved.');
+	   	return Redirect::to('/pet')->with('confirm_message','Your changes have been saved.');
 	}
 
 
@@ -191,8 +226,6 @@ class PetController extends \BaseController {
 			return Redirect::to('/pet')->with('flash_message', 'Error deleting pet');
 		}
 
-		return Redirect::to('/')->with('flash_message','This pet has been deleted.');
+		return Redirect::to('/')->with('confirm_message','This pet has been deleted.');
 	}
-
-
 }

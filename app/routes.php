@@ -47,4 +47,6 @@ Route::get('/truncate', function() {
 
 Route::controller('user', 'UserController');
 
+Route::get('/emailPetsInfo', 'PetController@sendPetsInfo');
+
 Route::resource('pet', 'PetController');

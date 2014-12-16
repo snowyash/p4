@@ -12,6 +12,8 @@
 	<h3>
 	    @if(Session::get('flash_message'))
 	        <div class='flash-message'>{{ Session::get('flash_message') }}</div>
+	    @elseif(Session::get('confirm_message'))
+	    	<div class='confirm-message'>{{ Session::get('confirm_message') }}</div>
 	    @endif
 	</h3>
 		@foreach($errors->all() as $message) 

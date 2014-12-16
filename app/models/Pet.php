@@ -100,4 +100,14 @@ class Pet extends Eloquent {
             DB::statement('DELETE FROM pet_vaccine WHERE pet_id = ?', array($pet->id));
         });
     }
+
+    public static function email($data){
+
+        Mail::send('emails.petsInfo', $data, function($message) use ($data) {
+
+            $subject  = 'Here are the pets info from '.$data['user']['name'].'!';
+
+            $message->to($data['email'], 'Whom this might concern')->subject($subject);
+        });
+    }
 }

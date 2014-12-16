@@ -2,6 +2,10 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.container{
+	margin-bottom: 10px;
+}
+
 .navbar{
 	background-color: #F37D2C;
 }
@@ -23,6 +27,10 @@ body{
 
 .flash-message{
 	color: red;
+}
+
+.confirm-message{
+	color: green;
 }
 
 .vaccine_list{

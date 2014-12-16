@@ -8,6 +8,8 @@
 	<h3>
 	    @if(Session::get('flash_message'))
 	        <div class='flash-message'>{{ Session::get('flash_message') }}</div>
+	    @elseif(Session::get('confirm_message'))
+	    	<div class='confirm-message'>{{ Session::get('confirm_message') }}</div>
 	    @endif
 	</h3>
 
@@ -35,23 +37,41 @@
 			            	for($i = 1; $i < 7; $i++){
 			            	echo "<tr>";
 			                $vaccine = $pet->vaccines()->where('id', '=', $i)->first();
-			                echo "<td>".$vaccine->name."&nbsp</td>";
+			                echo "<td>".$vaccine->name."&nbsp;</td>";
 			                if($vaccine->pivot->expiry === '0000-00-00'){
-			                	echo "<td>&nbsp No Data </td>";
+			                	echo "<td>&nbsp; No Data </td>";
 			                } else
-			                	echo "<td>&nbsp".$vaccine->pivot->expiry."</td>";
+			                	echo "<td>&nbsp;".$vaccine->pivot->expiry."</td>";
 			                echo "</tr>";
 			            	}
 			            ?>
 			            </table>
 		            </li>	
 	        	</ul>
-
-	        	<ul class="pet_list">
-	        		
-				</ul>
 			</div>
 		@endforeach
 
+    	<div class="container col-lg-11 text-center">
+
+    		{{ Form::open(array('action' => array('PetController@sendPetsInfo'), 'method' => 'get')) }}
+
+			<div class="input-group">
+
+    		{{ Form::text('email', 'Please input recipient email here...', array(
+	              'class' => 'form-control float-left',
+	          )) }}
+
+	        <span class="input-group-btn">
+
+	    		{{ Form::submit('Email Pets Info', array(
+		              'class' => 'btn btn-primary float-left',
+		          )) }}
+
+	        </span>
+
+			</div>
+
+			{{ Form::close() }}
+		</div>
 	@endif
 @stop

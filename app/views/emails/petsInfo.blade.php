@@ -30,6 +30,7 @@
 	@endforeach
 </div>
 
+<br />
 <p>
     - Team Pawbooks
 </p>

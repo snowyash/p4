@@ -122,6 +122,6 @@ class UserController extends \BaseController {
 	    Auth::logout();
 
 	    # Send them to the homepage
-	    return Redirect::to('/')->with('confirm_message', 'Goodbye!');
+	    return Redirect::to('/');
     }
 }

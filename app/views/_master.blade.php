@@ -32,39 +32,43 @@
 <body>
 
     <div class="navbar-wrapper">
-      <div class="container">
-
-        <div class="header">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            @if(Auth::check())
-                <li class="dropdown">
-                  <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Pets<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="/pet">See All Pets</a></li>
-                    <li><a href="/pet/create">Add a Pet</a></li>
-                  </ul>
-                </li>
-                <li><a href='/user/logout'>Log out {{ Auth::user()->email; }}</a></li>
-            @else 
-                <li><a href='/user/signup'>Sign up</a></li>
-                <li><a href='/user/login'>Log in</a></li>
-            @endif
-          </ul>
-        </nav>
-        <h2 class="text-muted"><a id="brand" href="/">PawBook</a></h2>
+      <div class="container header">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed nav-button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="brand" href="/">PawBook</a>
+        </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav pull-right">
+                @if(Auth::check())
+                    <li class="dropdown">
+                      <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Pets<span class="caret"></span></a>
+                      <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="/pet">See All Pets</a></li>
+                        <li><a href="/pet/create">Add a Pet</a></li>
+                      </ul>
+                    </li>
+                    <li><a href='/user/logout'>Log out {{ Auth::user()->email; }}</a></li>
+                @else 
+                    <li><a href='/user/signup'>Sign up</a></li>
+                    <li><a href='/user/login'>Log in</a></li>
+                @endif
+              </ul>
+            </div>
       </div>
+    </div>
 
     <div class="container">
         @yield('content')
     </div>
     
-    <footer class="footer">
+    <footer class="container footer">
         <p>&copy; PawBook 2015</p>
     </footer>
-      
-    </div>
-    </div>
 
     {{ HTML::script('myscripts.js') }}
     

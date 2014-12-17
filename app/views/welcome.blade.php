@@ -8,8 +8,8 @@
 	<h1>
 	    @if(Session::get('flash_message'))
 	    	<div class='flash-message'>{{ Session::get('flash_message') }}</div>
-	    @elseif(Session::get('confirm_message'))
-	        <div class='confirm-message'>{{ Session::get('confirm_message').'&nbsp;'.Auth::user()->name.'!' }}</div>
+        @elseif(Session::get('confirm_message'))
+            <div class='confirm-message'>{{ Session::get('confirm_message').'&nbsp;'.Auth::user()->name.'!' }}</div>
 	    @endif
 	</h1>
 

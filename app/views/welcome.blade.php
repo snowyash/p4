@@ -20,9 +20,7 @@
                 <li><a href="/pet/create">Add a pet</a></li>
             </ul>
         @else 
-        	<div class="col-lg-5 col-centered">
-            	<img src="img/logo.png" />
-            </div>
+        	<img class="logo" src="img/logo.png" />
             <h2 class="text-center"><a href="/user/signup">Signup</a> or <a href="/user/login">Login</a> to get started.</h2>
         @endif
 	@stop

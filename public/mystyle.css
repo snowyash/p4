@@ -28,6 +28,12 @@ body{
     margin-bottom: 30px;
 }
 
+.logo{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .col-right{
     float: right;
 }

@@ -45,13 +45,8 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav pull-right">
                 @if(Auth::check())
-                    <li class="dropdown">
-                      <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Pets<span class="caret"></span></a>
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="/pet">See All Pets</a></li>
-                        <li><a href="/pet/create">Add a Pet</a></li>
-                      </ul>
-                    </li>
+                    <li><a href="/pet">See All Pets</a></li>
+                    <li><a href="/pet/create">Add a Pet</a></li>
                     <li><a href='/user/logout'>Log out {{ Auth::user()->email; }}</a></li>
                 @else 
                     <li><a href='/user/signup'>Sign up</a></li>

@@ -97,6 +97,7 @@ class Pet extends Eloquent {
         Pet::saveVaccine( $pet, filter_var( $distemper, FILTER_SANITIZE_STRING ), 'Distemper' );
         Pet::saveVaccine( $pet, filter_var( $flea, FILTER_SANITIZE_STRING ), 'Flea Prevention' );
 
+        return $pet;
     }
 
     public static function updateVaccine( $pet, $date, $name ){

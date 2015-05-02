@@ -2,9 +2,9 @@
 
 class Vaccine extends Eloquent { 
 
-	protected $fillable = array('name');
+	protected $fillable = array( 'name' );
 
     public function pets() {
-        return $this->belongsToMany('Pet');
+        return $this->belongsToMany( 'Pet' );
     }
 }

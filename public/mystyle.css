@@ -28,10 +28,94 @@ body{
     margin-bottom: 30px;
 }
 
-.logo{
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
+.jumbotron{
+	background: url('../img/jumbotron.jpg') no-repeat center center;
+	background-size: 100% 120%;
+	background-position: 0px 0px;
+	height: 420px;
+	opacity: 0.80;
+    filter: alpha(opacity=80);
+
+	-webkit-transition: 1s ease-in-out;
+	-moz-transition: 1s ease-in-out;
+	-o-transition: 1s ease-in-out;
+	transition: 1s ease-in-out;
+}
+
+.jumbotronAnimate{
+	background-position: 0px -50px;
+}
+
+.jumbotron h1{
+	padding-top: 160px;
+	color: #1A0A00;
+	cursor: auto;
+}
+
+.row{
+	height: 180px;
+}
+
+.row .col-lg-4 p{
+	height: 80px;
+	opacity: 1;
+}
+
+.msgHover{
+	padding: 2px 2px 2px 2px;
+	color: #333333;
+	cursor: pointer;
+	border: 3px solid black;
+	-webkit-animation: msgHoverAnimation 2s;
+	-moz-animation: msgHoverAnimation 2s;
+	-o-animation: msgHoverAnimation 2s;
+	animation: msgHoverAnimation 2s;
+}
+
+@-webkit-keyframes msgHoverAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-moz-keyframes msgHoverAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-o-keyframes msgHoverAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes msgHoverAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+.msgHoverOut{
+	-webkit-animation: msgHoverOutAnimation 2s;
+	-moz-animation: msgHoverOutAnimation 2s;
+	-o-animation: msgHoverOutAnimation 2s;
+	animation: msgHoverOutAnimation 2s;
+}
+
+@-webkit-keyframes msgHoverOutAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-moz-keyframes msgHoverOutAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-o-keyframes msgHoverOutAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes msgHoverOutAnimation {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+.hide{
+	display: none;
+	opacity: 0;
 }
 
 .col-right{
@@ -87,4 +171,8 @@ ul, li {
 
 .float-left{
 	float: left;
+}
+
+footer {
+	clear: both;
 }

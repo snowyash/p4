@@ -12,73 +12,73 @@ class CreateTables extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function($table) {
+		Schema::create( 'users', function( $table ) {
 
-	        $table->increments('id')->unsigned();
+	        $table->increments( 'id' )->unsigned();
 
 	        $table->timestamps();
 
-	        $table->string('name');
-	        $table->string('surname');
-	        $table->string('email')->unique();
-		    $table->string('remember_token',100); 
-		    $table->string('password');
+	        $table->string( 'name' );
+	        $table->string( 'surname' );
+	        $table->string( 'email' )->unique();
+		    $table->string( 'remember_token',100 ); 
+		    $table->string( 'password' );
 
 		});
 
-		Schema::create('vets', function($table) {
+		Schema::create( 'vets', function( $table ) {
 
-	        $table->increments('id')->unsigned();
+	        $table->increments( 'id' )->unsigned();
 
 	        $table->timestamps();
 
-	        $table->string('name');
-	        $table->string('address');
-	        $table->string('phone');
-	        $table->string('email')->nullable();
-	        $table->string('website')->nullable();
+	        $table->string( 'name' );
+	        $table->string( 'address' );
+	        $table->string( 'phone' );
+	        $table->string( 'email' )->nullable();
+	        $table->string( 'website' )->nullable();
 		});
 
-		Schema::create('pets', function($table) {
+		Schema::create( 'pets', function( $table ) {
 
-	        $table->increments('id')->unsigned();
+	        $table->increments( 'id' )->unsigned();
 
 	        $table->timestamps();
 
-	        $table->string('name');
-	        $table->string('breed');
-	        $table->string('sex');
-			$table->date('birthday');
-	        $table->integer('user_id')->unsigned();
-	        $table->integer('vet_id')->unsigned();
+	        $table->string( 'name' );
+	        $table->string( 'breed' );
+	        $table->string( 'sex' );
+			$table->date( 'birthday' );
+	        $table->integer( 'user_id' )->unsigned();
+	        $table->integer( 'vet_id' )->unsigned();
 
-	        $table->foreign('user_id')->references('id')->on('users');
-	        $table->foreign('vet_id')->references('id')->on('vets');
+	        $table->foreign( 'user_id' )->references( 'id' )->on( 'users' );
+	        $table->foreign( 'vet_id' )->references( 'id' )->on( 'vets' );
 		});
 
-		Schema::create('vaccines', function($table) {
+		Schema::create( 'vaccines', function( $table ) {
 
-	        $table->increments('id')->unsigned();
+	        $table->increments( 'id' )->unsigned();
 
 	        $table->timestamps();
 
-	        $table->string('name');
+	        $table->string( 'name' );
 	        
 		});
 
-		Schema::create('pet_vaccine', function($table) {
+		Schema::create( 'pet_vaccine', function( $table ) {
 
 	        # AI, PK
 			# none needed
  
 			# General data...
-			$table->integer('pet_id')->unsigned();
-			$table->integer('vaccine_id')->unsigned();
-			$table->date('expiry');
+			$table->integer( 'pet_id' )->unsigned();
+			$table->integer( 'vaccine_id' )->unsigned();
+			$table->date( 'expiry' );
 			
 			# Define foreign keys...
-			$table->foreign('pet_id')->references('id')->on('pets');
-			$table->foreign('vaccine_id')->references('id')->on('vaccines');
+			$table->foreign( 'pet_id' )->references( 'id' )->on( 'pets' );
+			$table->foreign( 'vaccine_id' )->references( 'id' )->on( 'vaccines' );
 	        
 		});
 	}
@@ -90,11 +90,11 @@ class CreateTables extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('pet_vaccine');
-		Schema::drop('vaccines');
-		Schema::drop('pets');
-		Schema::drop('vets');
-		Schema::drop('users');
+		Schema::drop( 'pet_vaccine' );
+		Schema::drop( 'vaccines' );
+		Schema::drop( 'pets' );
+		Schema::drop( 'vets' );
+		Schema::drop( 'users');
 	}
 
 }

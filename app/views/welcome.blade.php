@@ -42,7 +42,11 @@
             </div>
         </div>
 
-        <h2 class="text-center call-to-action"><a href="/user/signup">Sign Up</a> to get started or <a href="/user/login">Login</a></h2>
+        <div class="row">
+            <h2 class="text-center call-to-action">
+                <a href="/user/signup">Sign Up</a> to get started or <a href="/user/login">Login</a>
+            </h2>
+        </div>
             
         @endif
 	@stop

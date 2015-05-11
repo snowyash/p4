@@ -52,10 +52,6 @@ body{
 	cursor: auto;
 }
 
-.row{
-	height: 180px;
-}
-
 .row .col-lg-4 p{
 	height: 80px;
 	opacity: 1;

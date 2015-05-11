@@ -5,13 +5,13 @@
 @stop
 
 @section( 'content' )
-	  <h1>
+	<h1>
 	    @if( Session::get( 'flash_message' ))
-	    	  <div class='flash-message'>{{ Session::get( 'flash_message' ) }}</div>
-      @elseif( Session::get( 'confirm_message' ))
-          <div class='confirm-message'>{{ Session::get( 'confirm_message' ).'&nbsp;'.Auth::user()->name.'!' }}</div>
+	    	<div class='flash-message'>{{ Session::get( 'flash_message' ) }}</div>
+        @elseif( Session::get( 'confirm_message' ))
+            <div class='confirm-message'>{{ Session::get( 'confirm_message' ).'&nbsp;'.Auth::user()->name.'!' }}</div>
 	    @endif
-	  </h1>
+	</h1>
 
     @if(Auth::check())
         <h3>What do you want to do today?</h3>
@@ -21,7 +21,7 @@
         </ul>
     @else 
         <div class="jumbotron">
-            <h1>Take him with you wherever you go!</h1>
+            <h1>Take him with you everywhere!</h1>
         </div> 
 
         <div class="row">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <h2 class="text-center"><a href="/user/signup">Sign Up</a> to get started or <a href="/user/login">Login</a></h2>
+        <h2 class="text-center call-to-action"><a href="/user/signup">Sign Up</a> to get started or <a href="/user/login">Login</a></h2>
             
         @endif
 	@stop

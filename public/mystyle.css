@@ -173,6 +173,10 @@ ul, li {
 	float: left;
 }
 
+.call-to-action {
+	clear: both;
+}
+
 footer {
 	clear: both;
 }
